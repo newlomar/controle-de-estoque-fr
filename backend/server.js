@@ -12,11 +12,15 @@ app.use(express.json());
 //criar um produto
 app.post('/novo_produto', async (req, res) => {
     try {
-        const { nome, quantidade, estoque } = req.body;
+        const { nome, estoque } = req.body;
+        let { quantidade } = req.body;
+        quantidade = Number(quantidade);
+
         const novoProduto = await pool.query(
             'INSERT INTO produtos (nome, quantidade, estoque) VALUES ($1, $2, $3) RETURNING *', 
             [nome, quantidade, estoque]
         );
+        
         
         res.json(novoProduto.rows[0]);     
     }
@@ -76,7 +80,9 @@ app.get('/estoques/:estoque', async (req, res) => {
 app.put('/editar_produto/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { nome, quantidade, estoque } = req.body;
+        const { nome, estoque } = req.body;
+        let { quantidade } = req.body;
+        quantidade = Number(quantidade);
 
         const editarProduto = await pool.query(
             'UPDATE produtos SET (nome, quantidade, estoque) = ($1, $2, $3) WHERE id = $4',
@@ -94,7 +100,8 @@ app.put('/editar_produto/:id', async (req, res) => {
 app.put('/editar_estoque/:estoque', async (req, res) => {
     try {
         const { estoque } = req.params;
-        const { quantidade } = req.body;
+        let { quantidade } = req.body;
+        quantidade = Number(quantidade);
 
         const editarEstoque = await pool.query(
             'UPDATE produtos SET quantidade = $1 WHERE estoque = $2',
