@@ -1,4 +1,7 @@
 import React, { Component, Fragment } from 'react';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 
 class InputCriacao extends Component {
 
@@ -61,34 +64,42 @@ class InputCriacao extends Component {
 
         return (
             <Fragment>
-                <h2>Form Criação</h2>
-                <form onSubmit={this.onSubmitForm}>
-                    <div>
-                        <label>Nome do Produto</label>
-                        <input 
+                <Typography align="left" component="h2" variant="h5" color="green" gutterBottom>Inserir novo produto</Typography>
+                <Grid container direction="column" justify="center" alignItems="center">
+                    <form onSubmit={this.onSubmitForm}>
+                        <div>
+                        <TextField 
+                            id="filled-basic" 
+                            label="Nome" 
+                            variant="filled" 
                             type="text" 
                             value={nome}
                             onChange={this.mudancaNome}
                         />
-                    </div>
-                    <div>
-                        <label>Quantidade</label>
-                        <input 
-                            type="number"
-                            value={quantidade}
-                            onChange={this.mudancaQuantidade}
-                        />
-                    </div>
-                    <div>
-                        <label>Nome do estoque</label>
-                        <input 
-                            type="text"
-                            value={estoque}
-                            onChange={this.mudancaEstoque}
-                        />
-                    </div>
-                    <button>Adicionar</button>
-                </form>
+                        </div>
+                        <div>
+                            <TextField
+                                id="filled-basic" 
+                                label="Quantidade" 
+                                variant="filled" 
+                                type="number"
+                                value={quantidade}
+                                onChange={this.mudancaQuantidade}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                id="filled-basic"
+                                label="Estoque"
+                                variant="filled"
+                                type="text"
+                                value={estoque}
+                                onChange={this.mudancaEstoque}
+                            />
+                        </div>
+                        <button>Adicionar</button>
+                    </form>
+                </Grid>
             </Fragment>
         );
     }

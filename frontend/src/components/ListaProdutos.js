@@ -1,4 +1,23 @@
 import React, { Fragment, Component} from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+
+// const styles = theme => ({
+//     root: {
+//         background: 'white',
+//         color: 'black'
+//     },
+//     heading: {
+//         textAlign: 'center'
+//     }
+// });
 
 class ListaProdutos extends Component {
 
@@ -36,6 +55,8 @@ class ListaProdutos extends Component {
     };
 
     render() {
+    
+        const { classes } = this.props;
 
         const { produtos, caixaDePesquisa } = this.state;
 
@@ -45,41 +66,37 @@ class ListaProdutos extends Component {
 
         return (
             <Fragment>
-                <h2>Lista de Produtos:</h2>
-                <div>
-                    <label>Filtrar produtos por nomes</label>
-                    <input 
+                <Grid container lg={12} direction="column" justify="center" alignItems="center">
+                    <Typography align="center" component="h2" variant="h4" color="success.main" gutterBottom>Lista de Produtos</Typography>
+                    <TextField
+                        id="standard-basic" 
+                        label="Filtrar por nome"
+                        color="secondary"
                         type="text"
                         value={caixaDePesquisa}
                         onChange={this.mudancaCaixaPesquisa}
                     />
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome do Produto</th>
-                            <th>Quantidade</th>
-                            <th>Nome do Estoque</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>0000</td>
-                            <td>Nome1</td>
-                            <td>Quantidade1</td>
-                            <td>Estoque1</td>
-                        </tr>
-                        {produtosFiltrados.map((produto) => (
-                            <tr>
-                                <td>{produto.id}</td>
-                                <td>{produto.nome}</td>
-                                <td>{produto.quantidade}</td>
-                                <td>{produto.estoque}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>ID</TableCell>
+                                <TableCell>Nome do Produto</TableCell>
+                                <TableCell>Quantidade</TableCell>
+                                <TableCell>Nome do Estoque</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {produtosFiltrados.map((produto) => (
+                                <TableRow>
+                                    <TableCell>{produto.id}</TableCell>
+                                    <TableCell>{produto.nome}</TableCell>
+                                    <TableCell>{produto.quantidade}</TableCell>
+                                    <TableCell>{produto.estoque}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </Grid>
             </Fragment>
         );
     };
