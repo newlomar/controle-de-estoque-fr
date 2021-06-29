@@ -1,6 +1,6 @@
 # Aplicação de controle de estoque
 
-Aplicação criada com intuito de ser um controle de estoque. Nesse repositório estão todos arquivos da aplicação
+Aplicação criada com intuito de ser um controle de estoque. Nesse repositório estão todos arquivos da aplicação.
 
 
 ## Requisitos e como fazer a aplicação funcionar localmente
