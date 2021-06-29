@@ -1,4 +1,29 @@
 import React, { Component, Fragment } from 'react'
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { withStyles } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+const styles = theme => ({
+    accordion: {
+        marginTop: 50
+    },
+    btn: {
+        marginTop: 10,
+        backgroundColor: '#f48fb1',
+        color: 'white',
+        '&:hover': {
+            backgroundColor: 'white',
+            color: '#f48fb1'
+        }
+    }
+});
 
 class FormsDelecao extends Component {
     
@@ -66,40 +91,85 @@ class FormsDelecao extends Component {
     render() {
 
         const { id, estoque } = this.state;
+        const { classes } = this.props;
 
         return (
             <Fragment>
-                <div>
-                    <h2>Deletar Produto</h2>
-                    <form onSubmit={this.onSubmitFormProduto}>
-                        <div>
-                                <label>ID do produto</label>
-                                <input 
-                                type="number"
-                                value={id}
-                                onChange={this.mudancaID}
-                            />
-                        </div>
-                        <button>Deletar produto</button>
-                    </form>
-                </div>
-                <div>
-                    <h2>Deletar Estoque</h2>
-                    <form onSubmit={this.onSubmitFormEstoque}>
-                        <div>
-                            <label>Nome do estoque</label>
-                            <input 
-                                type="text"
-                                value={estoque}
-                                onChange={this.mudancaEstoque}
-                            />
-                        </div>
-                        <button>Deletar estoque</button>
-                    </form>
-                </div>
+                <Container>
+                    <Accordion className={classes.accordion}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                            <Typography align="left" component="h2" variant="h5" gutterBottom>
+                                Deleção de produto
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Accordion>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                    <Typography align="left" component="h2" variant="h5" gutterBottom>
+                                        Deleção de unidade
+                                    </Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <form onSubmit={this.onSubmitFormProduto}>
+                                        <TextField
+                                            id="filled-basic"
+                                            label="ID do produto"
+                                            variant="filled"
+                                            type="number"
+                                            value={id}
+                                            onChange={this.mudancaID}
+                                            fullWidth
+                                            required
+                                        />
+                                        <Button 
+                                            type="submit"
+                                            endIcon={<DeleteIcon/>}
+                                            color="primary"
+                                            variant="contained"
+                                            className={classes.btn}
+                                        >
+                                            Deletar Produto
+                                        </Button>
+                                    </form>
+                                </AccordionDetails>
+                            </Accordion>
+                            <Accordion>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                    <Typography align="left" component="h2" variant="h5" gutterBottom>
+                                        Deleção de estoque
+                                    </Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <form onSubmit={this.onSubmitFormEstoque}>
+                                    <label>Nome do estoque</label>
+                                        <TextField 
+                                            id="filled-basic"
+                                            label="Nome do estoque - (não utilizar espaço)"
+                                            variant="filled"
+                                            type="text"
+                                            value={estoque}
+                                            onChange={this.mudancaEstoque}
+                                            fullWidth
+                                            required
+                                        />
+                                        <Button 
+                                            type="submit"
+                                            endIcon={<DeleteIcon/>}
+                                            color="primary"
+                                            variant="contained"
+                                            className={classes.btn}
+                                        >
+                                            Deletar estoque
+                                        </Button>
+                                    </form>
+                                </AccordionDetails>
+                            </Accordion>
+                        </AccordionDetails>
+                    </Accordion>
+                </Container>
             </Fragment>
         );
     };
 };
 
-export default FormsDelecao;
+export default withStyles(styles)(FormsDelecao);

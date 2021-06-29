@@ -6,7 +6,24 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+import { withStyles } from '@material-ui/core';
 
+const styles = theme => ({
+    accordion: {
+        marginTop: 50
+    },
+    btn: {
+        marginTop: 10,
+        backgroundColor: '#88BC23',
+        color: 'white',
+        '&:hover': {
+            backgroundColor: 'white',
+            color: '#88BC23'
+        }
+    }
+});
 
 class InputCriacao extends Component {
 
@@ -66,19 +83,21 @@ class InputCriacao extends Component {
     render() {
 
         const { nome, quantidade, estoque } = this.state;
+        const { classes } = this.props;
 
         return (
             <Fragment>
                 <Container>
-                    <Accordion>
+                    <Accordion className={classes.accordion}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography align="left" component="h2" variant="h5" color="green" gutterBottom>
+                            <Typography align="left" component="h2" variant="h5" gutterBottom>
                                 Inserção de novo produto
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <form onSubmit={this.onSubmitForm}>
-                                <TextField 
+                                <TextField
+                                    className={classes.input}
                                     id="filled-basic" 
                                     label="Nome" 
                                     variant="filled" 
@@ -86,6 +105,7 @@ class InputCriacao extends Component {
                                     value={nome}
                                     onChange={this.mudancaNome}
                                     fullWidth
+                                    required
                                 />
                                 <TextField
                                     id="filled-basic" 
@@ -95,6 +115,7 @@ class InputCriacao extends Component {
                                     value={quantidade}
                                     onChange={this.mudancaQuantidade}
                                     fullWidth
+                                    required
                                 />
                                 <TextField
                                     id="filled-basic"
@@ -104,8 +125,17 @@ class InputCriacao extends Component {
                                     value={estoque}
                                     onChange={this.mudancaEstoque}
                                     fullWidth
+                                    required
                                 />
-                                <button type="submit">Adicionar</button>
+                                <Button 
+                                    type="submit"
+                                    endIcon={<AddIcon />}
+                                    color="primary"
+                                    variant="contained"
+                                    className={classes.btn}
+                                >
+                                    Adicionar
+                                </Button>
                             </form>
                         </AccordionDetails>
                     </Accordion>
@@ -115,4 +145,4 @@ class InputCriacao extends Component {
     }
 };
 
-export default InputCriacao;
+export default withStyles(styles)(InputCriacao);

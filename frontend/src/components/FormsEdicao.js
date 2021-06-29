@@ -6,6 +6,24 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { withStyles } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import SyncIcon from '@material-ui/icons/Sync';
+
+const styles = theme => ({
+    accordion: {
+        marginTop: 50
+    },
+    btn: {
+        marginTop: 10,
+        backgroundColor: '#88BC23',
+        color: 'white',
+        '&:hover': {
+            backgroundColor: 'white',
+            color: '#88BC23'
+        }
+    }
+});
 
 class FormsEdicao extends Component {
 
@@ -117,20 +135,21 @@ class FormsEdicao extends Component {
     render() {
 
         const { id, nome, quantidade, estoque, atualizacaoEstoque, quantidadeEstoque } = this.state;
+        const { classes } = this.props;
 
         return (
             <Fragment>
                 <Container>
-                    <Accordion>
+                    <Accordion className={classes.accordion}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography align="left" component="h2" variant="h5" color="green" gutterBottom>
+                            <Typography align="left" component="h2" variant="h5" gutterBottom>
                                 Edição de produto
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Accordion>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                    <Typography align="left" component="h2" variant="h5" color="green" gutterBottom>
+                                    <Typography align="left" component="h2" variant="h5" gutterBottom>
                                         Edição de unidade
                                     </Typography>
                                 </AccordionSummary>
@@ -144,6 +163,7 @@ class FormsEdicao extends Component {
                                             value={id}
                                             onChange={this.mudancaID}
                                             fullWidth
+                                            required
                                         />
                                         <TextField 
                                             id="filled-basic"
@@ -153,6 +173,7 @@ class FormsEdicao extends Component {
                                             value={nome}
                                             onChange={this.mudancaNome}
                                             fullWidth
+                                            required
                                         />
                                         <TextField 
                                             id="filled-basic"
@@ -162,6 +183,7 @@ class FormsEdicao extends Component {
                                             value={quantidade}
                                             onChange={this.mudancaQuantidade}
                                             fullWidth
+                                            required
                                         />
                                         <TextField 
                                             id="filled-basic"
@@ -171,14 +193,23 @@ class FormsEdicao extends Component {
                                             value={estoque}
                                             onChange={this.mudancaEstoque}
                                             fullWidth
+                                            required
                                         />
-                                        <button type="submit">Atualizar</button>
+                                        <Button 
+                                            type="submit"
+                                            endIcon={<SyncIcon />}
+                                            color="primary"
+                                            variant="contained"
+                                            className={classes.btn}
+                                        >
+                                            Atualizar
+                                        </Button>
                                     </form>
                                 </AccordionDetails>
                             </Accordion>
                             <Accordion>
                                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                    <Typography align="left" component="h2" variant="h5" color="green" gutterBottom>
+                                    <Typography align="left" component="h2" variant="h5" gutterBottom>
                                         Edição de estoque
                                     </Typography>
                                 </AccordionSummary>
@@ -186,12 +217,13 @@ class FormsEdicao extends Component {
                                     <form onSubmit={this.onSubmitFormEstoque}>
                                         <TextField 
                                             id="filled-basic"
-                                            label="Nome do Estoque"
+                                            label="Nome do estoque - (não utilizar espaço)"
                                             variant="filled"
                                             type="text"
                                             value={atualizacaoEstoque}
                                             onChange={this.mudancaAtualizacaoEstoque}
                                             fullWidth
+                                            required
                                         />
                                         <TextField 
                                             id="filled-basic"
@@ -201,8 +233,17 @@ class FormsEdicao extends Component {
                                             value={quantidadeEstoque}
                                             onChange={this.mudancaQuantidadeEstoque}
                                             fullWidth
+                                            required
                                         />
-                                        <button type="submit">Atualizar</button>
+                                        <Button 
+                                            type="submit"
+                                            endIcon={<SyncIcon />}
+                                            color="primary"
+                                            variant="contained"
+                                            className={classes.btn}
+                                        >
+                                            Atualizar
+                                        </Button>
                                     </form>
                                 </AccordionDetails>
                             </Accordion>
@@ -214,4 +255,4 @@ class FormsEdicao extends Component {
     }
 };
 
-export default FormsEdicao;
+export default withStyles(styles)(FormsEdicao);

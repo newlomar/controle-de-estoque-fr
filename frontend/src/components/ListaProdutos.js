@@ -13,16 +13,14 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-
-// const styles = theme => ({
-//     root: {
-//         background: 'white',
-//         color: 'black'
-//     },
-//     heading: {
-//         textAlign: 'center'
-//     }
-// });
+const styles = theme => ({
+    accordion: {
+        marginTop: 50
+    },
+    searchTwo: {
+        marginLeft: 20
+    }
+});
 
 class ListaProdutos extends Component {
 
@@ -31,7 +29,8 @@ class ListaProdutos extends Component {
 
         this.state = {
             produtos: [],
-            caixaDePesquisa: ''
+            caixaDePesquisa: '',
+            caixaDePesquisaEstoque: ''
         };
     };
 
@@ -55,6 +54,12 @@ class ListaProdutos extends Component {
         });
     };
 
+    mudancaCaixaPesquisaEstoque = (event) => {
+        this.setState({
+            caixaDePesquisaEstoque: event.target.value
+        });
+    };
+
     componentDidMount() {
         this.buscarProdutos();
     };
@@ -63,37 +68,44 @@ class ListaProdutos extends Component {
     
         const { classes } = this.props;
 
-        const { produtos, caixaDePesquisa } = this.state;
+        const { produtos, caixaDePesquisa, caixaDePesquisaEstoque } = this.state;
 
         const produtosFiltrados = produtos.filter((produto) => {
-            return  produto.nome.toLowerCase().includes(caixaDePesquisa.toLocaleLowerCase());
+            return  (
+                (produto.nome.toLowerCase().includes(caixaDePesquisa.toLocaleLowerCase()))
+                &&
+                (produto.estoque.toLowerCase().includes(caixaDePesquisaEstoque.toLocaleLowerCase()))
+            )
         });
 
         return (
             <Fragment>
                 <Container>
-                    <Accordion>
-                        <AccordionSummary>
-                        <Typography align="center" component="h2" variant="h4" color="success.main" gutterBottom>
+                    <Accordion className={classes.accordion}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography align="center" component="h2" variant="h4" gutterBottom>
                             Lista de Produtos
                         </Typography>
                         </AccordionSummary>
-                        <TextField
-                            id="standard-basic" 
-                            label="Filtrar por nome"
-                            color="secondary"
-                            type="text"
-                            value={caixaDePesquisa}
-                            onChange={this.mudancaCaixaPesquisa}
-                        />
-                        <TextField
-                            id="standard-basic" 
-                            label="Filtrar por nome"
-                            color="secondary"
-                            type="text"
-                            value={caixaDePesquisa}
-                            onChange={this.mudancaCaixaPesquisa}
-                        />
+                        <Container>
+                            <TextField
+                                id="standard-basic" 
+                                label="Filtrar por produto"
+                                color="secondary"
+                                type="text"
+                                value={caixaDePesquisa}
+                                onChange={this.mudancaCaixaPesquisa}
+                            />
+                            <TextField
+                                className={classes.searchTwo}
+                                id="standard-basic" 
+                                label="Filtrar por estoque"
+                                color="secondary"
+                                type="text"
+                                value={caixaDePesquisaEstoque}
+                                onChange={this.mudancaCaixaPesquisaEstoque}
+                            />
+                        </Container>
                         <AccordionDetails>
                             <Table>
                                 <TableHead>
@@ -123,4 +135,4 @@ class ListaProdutos extends Component {
     };
 };
 
-export default ListaProdutos;
+export default withStyles(styles)(ListaProdutos);
