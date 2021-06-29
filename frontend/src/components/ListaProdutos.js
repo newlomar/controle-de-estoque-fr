@@ -7,7 +7,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 
 // const styles = theme => ({
 //     root: {
@@ -66,37 +71,53 @@ class ListaProdutos extends Component {
 
         return (
             <Fragment>
-                <Grid container lg={12} direction="column" justify="center" alignItems="center">
-                    <Typography align="center" component="h2" variant="h4" color="success.main" gutterBottom>Lista de Produtos</Typography>
-                    <TextField
-                        id="standard-basic" 
-                        label="Filtrar por nome"
-                        color="secondary"
-                        type="text"
-                        value={caixaDePesquisa}
-                        onChange={this.mudancaCaixaPesquisa}
-                    />
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>ID</TableCell>
-                                <TableCell>Nome do Produto</TableCell>
-                                <TableCell>Quantidade</TableCell>
-                                <TableCell>Nome do Estoque</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {produtosFiltrados.map((produto) => (
-                                <TableRow>
-                                    <TableCell>{produto.id}</TableCell>
-                                    <TableCell>{produto.nome}</TableCell>
-                                    <TableCell>{produto.quantidade}</TableCell>
-                                    <TableCell>{produto.estoque}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </Grid>
+                <Container>
+                    <Accordion>
+                        <AccordionSummary>
+                        <Typography align="center" component="h2" variant="h4" color="success.main" gutterBottom>
+                            Lista de Produtos
+                        </Typography>
+                        </AccordionSummary>
+                        <TextField
+                            id="standard-basic" 
+                            label="Filtrar por nome"
+                            color="secondary"
+                            type="text"
+                            value={caixaDePesquisa}
+                            onChange={this.mudancaCaixaPesquisa}
+                        />
+                        <TextField
+                            id="standard-basic" 
+                            label="Filtrar por nome"
+                            color="secondary"
+                            type="text"
+                            value={caixaDePesquisa}
+                            onChange={this.mudancaCaixaPesquisa}
+                        />
+                        <AccordionDetails>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>ID</TableCell>
+                                        <TableCell>Nome do Produto</TableCell>
+                                        <TableCell>Quantidade</TableCell>
+                                        <TableCell>Nome do Estoque</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {produtosFiltrados.map((produto) => (
+                                        <TableRow>
+                                            <TableCell>{produto.id}</TableCell>
+                                            <TableCell>{produto.nome}</TableCell>
+                                            <TableCell>{produto.quantidade}</TableCell>
+                                            <TableCell>{produto.estoque}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </AccordionDetails>
+                    </Accordion>
+                </Container>
             </Fragment>
         );
     };

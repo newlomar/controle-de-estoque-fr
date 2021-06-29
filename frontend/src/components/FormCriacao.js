@@ -1,7 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 
 class InputCriacao extends Component {
 
@@ -64,42 +69,47 @@ class InputCriacao extends Component {
 
         return (
             <Fragment>
-                <Typography align="left" component="h2" variant="h5" color="green" gutterBottom>Inserir novo produto</Typography>
-                <Grid container direction="column" justify="center" alignItems="center">
-                    <form onSubmit={this.onSubmitForm}>
-                        <div>
-                        <TextField 
-                            id="filled-basic" 
-                            label="Nome" 
-                            variant="filled" 
-                            type="text" 
-                            value={nome}
-                            onChange={this.mudancaNome}
-                        />
-                        </div>
-                        <div>
-                            <TextField
-                                id="filled-basic" 
-                                label="Quantidade" 
-                                variant="filled" 
-                                type="number"
-                                value={quantidade}
-                                onChange={this.mudancaQuantidade}
-                            />
-                        </div>
-                        <div>
-                            <TextField
-                                id="filled-basic"
-                                label="Estoque"
-                                variant="filled"
-                                type="text"
-                                value={estoque}
-                                onChange={this.mudancaEstoque}
-                            />
-                        </div>
-                        <button>Adicionar</button>
-                    </form>
-                </Grid>
+                <Container>
+                    <Accordion>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                            <Typography align="left" component="h2" variant="h5" color="green" gutterBottom>
+                                Inserção de novo produto
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <form onSubmit={this.onSubmitForm}>
+                                <TextField 
+                                    id="filled-basic" 
+                                    label="Nome" 
+                                    variant="filled" 
+                                    type="text" 
+                                    value={nome}
+                                    onChange={this.mudancaNome}
+                                    fullWidth
+                                />
+                                <TextField
+                                    id="filled-basic" 
+                                    label="Quantidade" 
+                                    variant="filled" 
+                                    type="number"
+                                    value={quantidade}
+                                    onChange={this.mudancaQuantidade}
+                                    fullWidth
+                                />
+                                <TextField
+                                    id="filled-basic"
+                                    label="Nome do estoque - (não utilizar espaço)"
+                                    variant="filled"
+                                    type="text"
+                                    value={estoque}
+                                    onChange={this.mudancaEstoque}
+                                    fullWidth
+                                />
+                                <button type="submit">Adicionar</button>
+                            </form>
+                        </AccordionDetails>
+                    </Accordion>
+                </Container>
             </Fragment>
         );
     }

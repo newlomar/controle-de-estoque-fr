@@ -1,4 +1,11 @@
 import React, { Component, Fragment } from 'react';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 class FormsEdicao extends Component {
 
@@ -113,66 +120,95 @@ class FormsEdicao extends Component {
 
         return (
             <Fragment>
-                <div>
-                    <h2>Edição de produto</h2>
-                    <form onSubmit={this.onSubmitFormProduto}>
-                        <div>
-                            <label>ID do produto</label>
-                            <input 
-                                type="number" 
-                                value={id}
-                                onChange={this.mudancaID}
-                            />
-                        </div>
-                        <div>
-                            <label>Nome do Produto</label>
-                            <input 
-                                type="text" 
-                                value={nome}
-                                onChange={this.mudancaNome}
-                            />
-                        </div>
-                        <div>
-                            <label>Quantidade</label>
-                            <input 
-                                type="number" 
-                                value={quantidade}
-                                onChange={this.mudancaQuantidade}
-                            />
-                        </div>
-                        <div>
-                            <label>Nome do estoque</label>
-                            <input 
-                                type="text"
-                                value={estoque}
-                                onChange={this.mudancaEstoque}
-                            />
-                        </div>
-                        <button>Atualizar</button>
-                    </form>
-                </div>
-                <div>
-                    <h2>Edição de estoque</h2>
-                    <form onSubmit={this.onSubmitFormEstoque}>
-                        <div>
-                            <label>Nome do estoque</label>
-                            <input
-                                type="text"
-                                value={atualizacaoEstoque}
-                                onChange={this.mudancaAtualizacaoEstoque}
-                            />
-                        </div>
-                        <div>
-                            <label>Quantidade</label>
-                            <input 
-                                type="number"
-                                value={quantidadeEstoque}
-                                onChange={this.mudancaQuantidadeEstoque}
-                            />
-                        </div>
-                        <button>Editar estoque</button>
-                    </form>
-                </div>
+                <Container>
+                    <Accordion>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                            <Typography align="left" component="h2" variant="h5" color="green" gutterBottom>
+                                Edição de produto
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Accordion>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                    <Typography align="left" component="h2" variant="h5" color="green" gutterBottom>
+                                        Edição de unidade
+                                    </Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <form onSubmit={this.onSubmitFormProduto}>
+                                        <TextField 
+                                            id="filled-basic"
+                                            label="ID do produto"
+                                            variant="filled"
+                                            type="number"
+                                            value={id}
+                                            onChange={this.mudancaID}
+                                            fullWidth
+                                        />
+                                        <TextField 
+                                            id="filled-basic"
+                                            label="Nome do Produto"
+                                            variant="filled"
+                                            type="text"
+                                            value={nome}
+                                            onChange={this.mudancaNome}
+                                            fullWidth
+                                        />
+                                        <TextField 
+                                            id="filled-basic"
+                                            label="Quantidade"
+                                            variant="filled"
+                                            type="number"
+                                            value={quantidade}
+                                            onChange={this.mudancaQuantidade}
+                                            fullWidth
+                                        />
+                                        <TextField 
+                                            id="filled-basic"
+                                            label="Nome do estoque - (não utilizar espaço)"
+                                            variant="filled"
+                                            type="text"
+                                            value={estoque}
+                                            onChange={this.mudancaEstoque}
+                                            fullWidth
+                                        />
+                                        <button type="submit">Atualizar</button>
+                                    </form>
+                                </AccordionDetails>
+                            </Accordion>
+                            <Accordion>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                    <Typography align="left" component="h2" variant="h5" color="green" gutterBottom>
+                                        Edição de estoque
+                                    </Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <form onSubmit={this.onSubmitFormEstoque}>
+                                        <TextField 
+                                            id="filled-basic"
+                                            label="Nome do Estoque"
+                                            variant="filled"
+                                            type="text"
+                                            value={atualizacaoEstoque}
+                                            onChange={this.mudancaAtualizacaoEstoque}
+                                            fullWidth
+                                        />
+                                        <TextField 
+                                            id="filled-basic"
+                                            label="Quantidade para todos produtos"
+                                            variant="filled"
+                                            type="number"
+                                            value={quantidadeEstoque}
+                                            onChange={this.mudancaQuantidadeEstoque}
+                                            fullWidth
+                                        />
+                                        <button type="submit">Atualizar</button>
+                                    </form>
+                                </AccordionDetails>
+                            </Accordion>
+                        </AccordionDetails>
+                    </Accordion>
+                </Container>
             </Fragment>
         );
     }
