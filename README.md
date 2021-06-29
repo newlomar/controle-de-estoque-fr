@@ -63,6 +63,14 @@ Aplicação criada com intuito de ser um controle de estoque. Nesse repositório
 
 # Algumas considerações do autor sobre o projeto criado
 
-## Abaixo vou listar algumas das minhas considerações sobre o projeto. Elas não ter ordem específica e serão utilizadas parar que eu possa destacar os pontos que tenho noção de que não estão funcionando como deveriam e pretendo melhorá-los como forma de aprendizado.
+### Abaixo vou listar algumas das minhas considerações sobre o projeto. Elas não ter ordem específica e serão utilizadas parar que eu possa destacar os pontos que tenho noção de que não estão funcionando como deveriam e pretendo melhorá-los como forma de aprendizado.
 
-- A utilização da função: ```window.location = '/'```
+- A utilização da função: ```window.location = '/'``` nas funções de criação, edição e deleção no frontend é totalmente "incorreta" e vai contra um dos princípios básicos do React. Eu apenas utilizei essa forma de atualização pois não tive tempo no fim para fazer a trasinção de informações via componentes e gerar atualização na Lista de produtos após a execução de uma das funções. Eu apenas mantive dessa forma para que, a cada utilização de função, a lista de produtos possa ser atualizada e o usuário não precisa apertar f5 para ver uma lista atualizada. Porém, reconheço que é um gambiarra totalmente inapropriada, principalmente se tratando de React, onde a re-renderização apenas do componentes que alteraram é um princípio básico da existência da biblioteca.
+
+- A simplicidade dos endpoints no backend e do banco de dados: Acredito que exagerei na simplicidade do backend e a criação apenas de uma tabela no banco foi um exagero na simplicidade do projeto. Apesar disso, acredito que consegui resolver o que foi solicitado no desafio, mas reconheço que foi uma criação simples demais e um pouco de escalonamento solicitaria uma reformulação de todo o projeto.
+
+- Repeti bastante código nos componentes React e isso vai contra os princípios básicos de arquitetura limpa. É uma etapa que reconheço que seria fundalmental, porém não consegui melhorar minha abordagem nesse caso.
+
+- O Design da página está bastante cru e a página está visialmente feia. Eu nunca tinha tido contato com o Material UI e como gastei uma boa parte do tempo na criação dos componentes React, não consegui aproveitar o restante do tempo para deixar a aplicação bonita e "apresentável". Porém, tentei criar algo que fizesse sentido, pelo menos separando as partes da aplicação que interagiam com um endpoint diferente.
+
+- Por fim, seguirei lapidando a aplicação, visto que é uma excelente forma de aprendizado e estou à disposição para tirar qualquer dúvida sobre o código e sobre a lógica de qualquer funcionamento criado nele.
